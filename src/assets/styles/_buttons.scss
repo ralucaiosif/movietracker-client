@@ -1,0 +1,7 @@
+.mat-button {
+
+  &.active {
+    color: $accent;
+    border-bottom: 2px solid $accent;
+  }
+}

@@ -1,0 +1,19 @@
+<div class="login">
+  <mat-card>
+    <mat-card-header>
+      <mat-card-title class="text--center">
+        Access <span class="title--primary">Movie</span><span class="title--secondary">Tracker</span>
+      </mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <button mat-button color="primary" (click)="showLogin = true; showRegister = false;" [ngClass]="{'active': showLogin}">
+        Login
+      </button>
+      <button mat-button color="primary" (click)="showRegister = true; showLogin = false;" [ngClass]="{'active': showRegister}">
+        Register
+      </button>
+      <app-login-form (onAuthenticate)="authenticate($event)" *ngIf="showLogin"></app-login-form>
+      <app-register [submitted]="registered" (onRegister)="register($event)" *ngIf="showRegister"></app-register>
+    </mat-card-content>
+  </mat-card>
+</div>
