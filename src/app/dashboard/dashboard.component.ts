@@ -23,7 +23,7 @@ export class DashboardComponent implements OnInit {
 	user: string;
 	favorites;
 	page: number = 1;
-	displayedColumns: string[] = ['number', 'title', 'genre'];
+	displayedColumns: string[] = ['number', 'title', 'genre', 'score'];
 
 	resultsLength = 0;
 	isLoadingResults = false;
@@ -38,12 +38,16 @@ export class DashboardComponent implements OnInit {
 
 	getFavorites() {
 		this.isLoadingResults = true;
-		this.moviesService.getFavorites(1)
+		this.moviesService.getFavorites(this.user.id)
 			.subscribe(
 				response => {
-					this.resultsLength = 50;
-					this.favorites = new MatTableDataSource<Movie>(response as Movie[]);
-					this.favorites.paginator = this.paginator;
+					if (response && response.length >= 1) {
+						this.resultsLength = response.length;
+						this.favorites = new MatTableDataSource<Movie>(response as Movie[]);
+						this.favorites.paginator = this.paginator;
+					} else {
+						this.resultsLength = 0;
+					}
 				},
 				error => {
 					console.log(error);
