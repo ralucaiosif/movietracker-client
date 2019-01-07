@@ -11,6 +11,8 @@ import { LoginComponent } from './login/login.component';
 import { HttpClientModule } from '@angular/common/http';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { RegisterComponent } from './register/register.component';
+import { NgxPaginationModule } from 'ngx-pagination';
+import { MovieDetailsComponent } from './movie-details/movie-details.component';
 
 @NgModule({
 	declarations: [
@@ -18,7 +20,8 @@ import { RegisterComponent } from './register/register.component';
 		LoginFormComponent,
 		LoginComponent,
 		DashboardComponent,
-		RegisterComponent
+		RegisterComponent,
+		MovieDetailsComponent
 	],
 	imports: [
 		BrowserModule,
@@ -26,8 +29,10 @@ import { RegisterComponent } from './register/register.component';
 		HttpClientModule,
 		ReactiveFormsModule,
 		BrowserAnimationsModule,
-		MaterialModule
+		MaterialModule,
+		NgxPaginationModule
 	],
+	entryComponents: [MovieDetailsComponent],
 	providers: [],
 	bootstrap: [AppComponent]
 })
