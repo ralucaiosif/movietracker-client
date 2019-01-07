@@ -3,6 +3,7 @@ import { ScrollingModule } from '@angular/cdk/scrolling';
 import { CdkTableModule } from '@angular/cdk/table';
 import { CdkTreeModule } from '@angular/cdk/tree';
 import { NgModule } from '@angular/core';
+import { FlexLayoutModule } from '@angular/flex-layout';
 import {
 	MatAutocompleteModule,
 	MatBadgeModule,
@@ -82,6 +83,7 @@ import {
 		MatTooltipModule,
 		MatTreeModule,
 		ScrollingModule,
+		FlexLayoutModule
 	]
 })
 export class MaterialModule { }
