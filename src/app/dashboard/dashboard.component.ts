@@ -2,6 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { LoginService } from '../services/login.service';
 import { MoviesService } from '../services/movies.service';
 import { Movie } from '../interfaces/movie.interface';
+import { User } from '../interfaces/user.interface';
 import { MovieDetailsComponent } from '../movie-details/movie-details.component';
 
 import { MatPaginator, MatTableDataSource, MatBottomSheet } from '@angular/material';
@@ -20,10 +21,10 @@ export class DashboardComponent implements OnInit {
 		private bottomSheet: MatBottomSheet
 	) { }
 
-	user: string;
-	favorites;
+	user: User;
+	favorites: MatTableDataSource<Movie>;
 	page: number = 1;
-	displayedColumns: string[] = ['number', 'title', 'genre', 'score'];
+	displayedColumns: string[] = ['number', 'title', 'genre', 'score', 'actions'];
 
 	resultsLength = 0;
 	isLoadingResults = false;
@@ -36,21 +37,20 @@ export class DashboardComponent implements OnInit {
 		this.getFavorites();
 	}
 
-	getFavorites() {
+	getFavorites(): void {
 		this.isLoadingResults = true;
 		this.moviesService.getFavorites(this.user.id)
 			.subscribe(
-				response => {
+				(response: Movie[]) => {
 					if (response && response.length >= 1) {
 						this.resultsLength = response.length;
-						this.favorites = new MatTableDataSource<Movie>(response as Movie[]);
+						this.favorites = new MatTableDataSource<Movie>(response);
 						this.favorites.paginator = this.paginator;
 					} else {
 						this.resultsLength = 0;
 					}
 				},
 				error => {
-					console.log(error);
 					this.isLoadingResults = false;
 				}, () => {
 					this.isLoadingResults = false;
@@ -58,10 +58,20 @@ export class DashboardComponent implements OnInit {
 			)
 	}
 
-	showDetails(movie) {
+	showDetails(movie: Movie): void {
 		this.bottomSheet.open(MovieDetailsComponent, {
 			data: movie
 		});
+	}
+
+	remove(movieId: String): void {
+		this.moviesService.remove(
+			this.user.id,
+			movieId
+		)
+			.subscribe(
+				() => this.getFavorites()
+			);
 	}
 
 }

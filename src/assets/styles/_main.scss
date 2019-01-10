@@ -1,71 +1,95 @@
 body {
-  margin: 0;
-  padding: 0;
-  position: relative;
+    margin: 0;
+    padding: 0;
+    position: relative;
 }
 
-mat-sidenav-container, mat-sidenav-content, mat-sidenav {
-  height: 100%;
+mat-sidenav,
+mat-sidenav-container,
+mat-sidenav-content {
+    height: 100%;
 }
 
 mat-sidenav {
-  width: 250px;
+    width: 250px;
 }
 
 a {
-  text-decoration: none;
-  color: white;
+    text-decoration: none;
+    color: white;
 }
 
-a:hover,
-a:active {
-  color: lightgray;
+a:active,
+a:hover {
+    color: lightgray;
 }
 
 .navigation-items {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-  cursor: pointer;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    cursor: pointer;
 }
 
 .icon {
-  display: inline-block;
-  height: 30px;
-  margin: 0 auto;
-  padding-right: 5px;
-  text-align: center;
-  vertical-align: middle;
-  width: 15%;
+    display: inline-block;
+    height: 30px;
+    margin: 0 auto;
+    padding-right: 5px;
+    text-align: center;
+    vertical-align: middle;
+    width: 15%;
 }
 
 .label {
-  display: inline-block;
-  line-height: 30px;
-  margin: 0;
-  width: 85%;
+    display: inline-block;
+    line-height: 30px;
+    margin: 0;
+    width: 85%;
 }
 
 main {
-  max-width: 1100px;
-  margin: auto;
-  margin-top: 32px;
-  padding: 0 20px;
+    max-width: 1100px;
+    margin: 32px auto auto;
+    padding: 0 20px;
 }
 
 .movies-table {
-  width: 100%;
+    width: 100%;
+
+    tr {
+        .actions {
+            text-align: center;
+
+            button {
+                visibility: hidden;
+            }
+        }
+
+        .title {
+            &:hover {
+                cursor: pointer;
+            }
+        }
+
+        &:hover {
+            .actions {
+                button {
+                    visibility: visible;
+                }
+            }
+        }
+    }
 }
 
 .mat-drawer-container {
-  background: #fff;
+    background: #fff;
 }
 
 .basic-container {
-  padding: 30px;
+    padding: 30px;
 }
 
 .mat-row:hover {
-  background-color: mat-color($app-primary, 100);
-  cursor: pointer;
+    background-color: mat-color($app-primary, 100);
 }
