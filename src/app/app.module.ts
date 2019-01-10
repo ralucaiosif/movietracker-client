@@ -13,6 +13,7 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { RegisterComponent } from './register/register.component';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { MovieDetailsComponent } from './movie-details/movie-details.component';
+import { MoviesComponent } from './movies/movies.component';
 
 @NgModule({
 	declarations: [
@@ -21,7 +22,8 @@ import { MovieDetailsComponent } from './movie-details/movie-details.component';
 		LoginComponent,
 		DashboardComponent,
 		RegisterComponent,
-		MovieDetailsComponent
+		MovieDetailsComponent,
+		MoviesComponent
 	],
 	imports: [
 		BrowserModule,

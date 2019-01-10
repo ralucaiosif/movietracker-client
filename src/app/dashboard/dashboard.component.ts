@@ -22,32 +22,35 @@ export class DashboardComponent implements OnInit {
 	) { }
 
 	user: User;
-	favorites: MatTableDataSource<Movie>;
-	page: number = 1;
-	displayedColumns: string[] = ['number', 'title', 'genre', 'score', 'actions'];
+	favorites: MatTableDataSource<Movie>; // observable for data table
+	suggestions: MatTableDataSource<Movie>; // observable for data table
+	page: number = 1;  // page should start from 1st page
+	displayedFavoritesColumns: string[] = ['number', 'title', 'genre', 'score', 'actions']; // columns to be rendered in the table
+	displayedSuggestionsColumns: string[] = ['number', 'title', 'genre', 'score']; // columns to be rendered in the table
 
-	resultsLength = 0;
+	favoritesResultsLength = 0; // init number of results
+	suggestionsResultsLength = 0; // init number of results
 	isLoadingResults = false;
-	isRateLimitReached = false;
 
 	@ViewChild(MatPaginator) paginator: MatPaginator;
 
 	ngOnInit() {
 		this.user = this.loginService.getUser();
 		this.getFavorites();
+		this.getSuggestions();
 	}
 
-	getFavorites(): void {
+	private getFavorites(): void {
 		this.isLoadingResults = true;
 		this.moviesService.getFavorites(this.user.id)
 			.subscribe(
 				(response: Movie[]) => {
 					if (response && response.length >= 1) {
-						this.resultsLength = response.length;
+						this.favoritesResultsLength = response.length;
 						this.favorites = new MatTableDataSource<Movie>(response);
 						this.favorites.paginator = this.paginator;
 					} else {
-						this.resultsLength = 0;
+						this.favoritesResultsLength = 0;
 					}
 				},
 				error => {
@@ -57,14 +60,24 @@ export class DashboardComponent implements OnInit {
 				}
 			)
 	}
+	
+	private getSuggestions(): void {
+		this.moviesService.getSuggestions(this.user.id)
+			.subscribe(
+				(response: Movie[]) => {
+						this.suggestionsResultsLength = response.length;
+						this.suggestions = new MatTableDataSource<Movie>(response);
+						this.suggestions.paginator = this.paginator;
+				})
+	}
 
-	showDetails(movie: Movie): void {
+	public showDetails(movie: Movie): void {
 		this.bottomSheet.open(MovieDetailsComponent, {
 			data: movie
 		});
 	}
 
-	remove(movieId: String): void {
+	public remove(movieId: String): void {
 		this.moviesService.remove(
 			this.user.id,
 			movieId
