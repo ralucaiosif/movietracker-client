@@ -4,8 +4,8 @@ import { MoviesService } from '../services/movies.service';
 import { Movie } from '../interfaces/movie.interface';
 import { User } from '../interfaces/user.interface';
 import { MovieDetailsComponent } from '../movie-details/movie-details.component';
-
 import { MatPaginator, MatTableDataSource, MatBottomSheet } from '@angular/material';
+import { MatSnackBar } from '@angular/material';
 import { merge, Observable, of as observableOf } from 'rxjs';
 import { tap } from 'rxjs/operators';
 
@@ -18,7 +18,8 @@ export class DashboardComponent implements OnInit {
 	constructor(
 		private loginService: LoginService,
 		private moviesService: MoviesService,
-		private bottomSheet: MatBottomSheet
+		private bottomSheet: MatBottomSheet,
+		private snackBar: MatSnackBar
 	) { }
 
 	user: User;
@@ -78,12 +79,18 @@ export class DashboardComponent implements OnInit {
 	}
 
 	public remove(movieId: String): void {
-		this.moviesService.remove(
-			this.user.id,
-			movieId
-		)
+		this.moviesService.remove(this.user.id, movieId)
 			.subscribe(
-				() => this.getFavorites()
+				() => {
+					this.getFavorites();
+					this.snackBar.open('Movie was removed from your favorites!', 'Close', {
+						duration: 2000
+					});
+				}, error => {
+					this.snackBar.open('Movie was note removed from your favorites! An error occured.', 'Close', {
+						duration: 2000
+					});
+				}
 			);
 	}
 

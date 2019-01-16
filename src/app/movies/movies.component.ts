@@ -4,6 +4,7 @@ import { LoginService } from '../services/login.service';
 import { Movie } from '../interfaces/movie.interface';
 import { User } from '../interfaces/user.interface';
 import { MatPaginator, MatTableDataSource, MatBottomSheet } from '@angular/material';
+import { MatSnackBar } from '@angular/material';
 
 @Component({
 	selector: 'app-movies',
@@ -14,7 +15,8 @@ export class MoviesComponent implements OnInit {
 
 	constructor(
 		private moviesService: MoviesService,
-		private loginService: LoginService
+		private loginService: LoginService,
+		private snackBar: MatSnackBar
 	) { }
 
 	movies: MatTableDataSource<Movie>;
@@ -53,9 +55,17 @@ export class MoviesComponent implements OnInit {
 	}
 
 	public addFavorite(movieID) {
-		this.moviesService.addFavorite(this.user.id, movieID)
+		this.moviesService.addFavorite(movieID, this.user.id)
 			.subscribe(
-				() => console.log('done ...')
+				() => {
+					this.snackBar.open('Movie was added to your favorites!', 'Close', {
+						duration: 2000
+					});
+				}, error => {
+					this.snackBar.open('Movie was not added to your favorites!', 'Close', {
+						duration: 2000
+					});
+				}
 			)
 	}
 
