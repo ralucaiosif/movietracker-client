@@ -25,7 +25,7 @@
                 </a>
             </div>
             <div fxFlex fxLayout fxLayoutAlign="flex-end" fxHide.xs>
-                <ul fxLayout fxLayoutGap="20px" class="navigation-items">
+                <ul fxLayout fxLayoutGap="20px" class="navigation-items" *ngIf="isLoggedIn">
                     <li>
                         <a routerLink="/">
                             My list
@@ -42,9 +42,15 @@
                         </a>
                     </li>
                     <li>
-                        <a>
+                        <a [matMenuTriggerFor]="menu">
                             <mat-icon class="icon">account_circle</mat-icon>
                         </a>
+                        <mat-menu #menu="matMenu">
+                            <button mat-menu-item (click)="logout()">
+                                <span>Logout</span>
+                                <mat-icon>exit_to_app</mat-icon>
+                            </button>
+                        </mat-menu>
                     </li>
                 </ul>
             </div>

@@ -31,4 +31,7 @@ export class LoginService {
 	register(newUser) {
 		return this.http.post('/api/users/register', newUser);
 	}
+	logout() {
+		localStorage.removeItem('userData');
+	}
 }
