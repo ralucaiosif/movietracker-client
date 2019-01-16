@@ -60,14 +60,14 @@ export class DashboardComponent implements OnInit {
 				}
 			)
 	}
-	
+
 	private getSuggestions(): void {
 		this.moviesService.getSuggestions(this.user.id)
 			.subscribe(
 				(response: Movie[]) => {
-						this.suggestionsResultsLength = response.length;
-						this.suggestions = new MatTableDataSource<Movie>(response);
-						this.suggestions.paginator = this.paginator;
+					this.suggestionsResultsLength = response.length;
+					this.suggestions = new MatTableDataSource<Movie>(response);
+					this.suggestions.paginator = this.paginator;
 				})
 	}
 

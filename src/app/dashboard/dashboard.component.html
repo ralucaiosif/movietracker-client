@@ -1,6 +1,6 @@
 <div class="favorites">
     <h3 class="mat-h3">My favorite movies ({{favoritesResultsLength}})</h3>
-    <ng-container *ngIf="favoritesResultsLength >= 1">
+    <ng-container *ngIf="favoritesResultsLength > 0">
         <table mat-table [dataSource]="favorites" class="movies-table">
             <ng-container matColumnDef="number">
                 <th mat-header-cell *matHeaderCellDef>#</th>
@@ -33,7 +33,7 @@
             <tr mat-header-row *matHeaderRowDef="displayedFavoritesColumns"></tr>
             <tr mat-row *matRowDef="let movie; columns: displayedFavoritesColumns;"></tr>
         </table>
-        <mat-paginator [length]="favoritesResultsLength" [pageSize]="'10'"></mat-paginator>
+        <mat-paginator [length]="50" [pageSize]="'10'"></mat-paginator>
     </ng-container>
     <p *ngIf="resultsLength == 0">
         You have not added any movies to your favorites list!

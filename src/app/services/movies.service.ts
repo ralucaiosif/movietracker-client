@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient,HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Movie } from '../interfaces/movie.interface';
 
@@ -9,12 +9,24 @@ import { Movie } from '../interfaces/movie.interface';
 export class MoviesService {
 
 	getFavorites(userID: number): Observable<Movie[]> {
-		return this.http.get<Movie[]>(`/api/user-movies/${userID}`);
+		return this.http.get<Movie[]>('http://5c1ce5d885f9df0013fb8a94.mockapi.io/rea/movies');
+		// return this.http.get<Movie[]>(`/api/user-movies/${userID}`);
 	};
-	
+
 	getMovies(): Observable<Movie[]> {
-		return this.http.get<Movie[]>(`/api/movies/all`);
+		return this.http.get<Movie[]>('http://5c1ce5d885f9df0013fb8a94.mockapi.io/rea/movies');
+		// return this.http.get<Movie[]>(`/api/movies/all`);
 	};
+
+	addFavorite(movieID, userID) {
+		const httpOptions = {
+			headers: new HttpHeaders({ 'Content-Type': 'application/json' }), body: {
+				movieId: movieID,
+				userId: userID
+			}
+		};
+		return this.http.post('/api/user-movies', httpOptions);
+	}
 
 	remove(userId, movieId) {
 		const httpOptions = {
@@ -23,13 +35,13 @@ export class MoviesService {
 				userId: userId
 			}
 		};
-		return this.http.delete('api/user-movies', httpOptions);
+		return this.http.delete('/api/user-movies', httpOptions);
 	};
 
 	getSuggestions(userId: number): Observable<Movie[]> {
 		return this.http.get<Movie[]>(`/api/user-movies/${userId}/suggestions`);
 	};
-	
+
 	constructor(
 		private http: HttpClient
 	) { }
