@@ -21,7 +21,7 @@ const routes: Routes = [
 		component: DashboardComponent,
 		canActivate: [AuthGuard],
 		data: {
-			expectedRole: 'user'
+			expectedRole: ['user', 'admin']
 		}
 	},
 	{
@@ -29,7 +29,7 @@ const routes: Routes = [
 		component: MoviesComponent,
 		canActivate: [AuthGuard],
 		data: {
-			expectedRole: 'user'
+			expectedRole: ['user', 'admin']
 		}
 	},
 	{

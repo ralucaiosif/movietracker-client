@@ -23,7 +23,7 @@ export class LoginService {
 		return this.getUser() ? true : false;
 	}
 	hasExpectedRole(role, expectedRole): Boolean {
-		if (role !== expectedRole) {
+		if (expectedRole.indexOf(role) === -1) {
 			return false;
 		}
 		return true;
