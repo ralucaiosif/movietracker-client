@@ -1,0 +1,33 @@
+<div>
+  <mat-form-field>
+    <mat-select placeholder="Select cinema" [(value)]="cinema">
+      <mat-option *ngFor="let cinema of data.cinemas" [value]="cinema.name">
+        {{cinema.name}}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+</div>
+
+<div>
+  <mat-form-field>
+    <mat-select placeholder="Select movie" [(value)]="movie">
+      <mat-option *ngFor="let movie of data.movies" [value]="movie.name">
+        {{movie.name}}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+
+</div>
+
+<div>
+  <mat-form-field>
+  <input matInput [matDatepicker]="picker" placeholder="View data"
+         (dateInput)="setDate('input', $event)" (dateChange)="setDate('change', $event)">
+  <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+  <mat-datepicker #picker></mat-datepicker>
+</mat-form-field>
+</div>
+
+<div>
+  <button mat-flat-button color="accent" (click)="addMovie();">Add movie</button>
+</div>

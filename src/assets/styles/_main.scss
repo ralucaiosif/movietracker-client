@@ -93,3 +93,10 @@ main {
 .mat-row:hover {
     background-color: mat-color($app-primary, 100);
 }
+
+.cinema {
+    .header {
+        display: flex;
+        justify-content: space-between;
+    }
+}

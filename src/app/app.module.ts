@@ -14,6 +14,8 @@ import { RegisterComponent } from './register/register.component';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { MovieDetailsComponent } from './movie-details/movie-details.component';
 import { MoviesComponent } from './movies/movies.component';
+import { CinemaComponent } from './cinema/cinema.component';
+import { AddMovieComponent } from './cinema/add-movie/add-movie.component';
 
 @NgModule({
 	declarations: [
@@ -23,7 +25,9 @@ import { MoviesComponent } from './movies/movies.component';
 		DashboardComponent,
 		RegisterComponent,
 		MovieDetailsComponent,
-		MoviesComponent
+		MoviesComponent,
+		CinemaComponent,
+		AddMovieComponent
 	],
 	imports: [
 		BrowserModule,
@@ -34,7 +38,7 @@ import { MoviesComponent } from './movies/movies.component';
 		MaterialModule,
 		NgxPaginationModule
 	],
-	entryComponents: [MovieDetailsComponent],
+	entryComponents: [MovieDetailsComponent, AddMovieComponent],
 	providers: [],
 	bootstrap: [AppComponent]
 })
