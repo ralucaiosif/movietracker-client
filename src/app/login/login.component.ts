@@ -19,16 +19,13 @@ export class LoginComponent implements OnInit {
 	) { }
 
 	ngOnInit() {
-		if (this.loggedIn) {
-			this.router.navigate(['/']);
-		}
 	}
 
 	authenticate(user): void {
 		this.loginService.authenticate(user)
 			.subscribe(
 				response => {
-                    this.loginService.setUserData(response);
+					this.loginService.setUserData(response);
 					this.router.navigate(['/']);
 				}
 			)

@@ -22,6 +22,12 @@ export class LoginService {
 	isLoggedIn(): boolean {
 		return this.getUser() ? true : false;
 	}
+	hasExpectedRole(role, expectedRole): Boolean {
+		if (role !== expectedRole) {
+			return false;
+		}
+		return true;
+	}
 	register(newUser) {
 		return this.http.post('/api/users/register', newUser);
 	}

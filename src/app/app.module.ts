@@ -16,6 +16,7 @@ import { MovieDetailsComponent } from './movie-details/movie-details.component';
 import { MoviesComponent } from './movies/movies.component';
 import { CinemaComponent } from './cinema/cinema.component';
 import { AddMovieComponent } from './cinema/add-movie/add-movie.component';
+import { UnauthorizedComponent } from './unauthorized/unauthorized.component';
 
 @NgModule({
 	declarations: [
@@ -27,7 +28,8 @@ import { AddMovieComponent } from './cinema/add-movie/add-movie.component';
 		MovieDetailsComponent,
 		MoviesComponent,
 		CinemaComponent,
-		AddMovieComponent
+		AddMovieComponent,
+		UnauthorizedComponent
 	],
 	imports: [
 		BrowserModule,
